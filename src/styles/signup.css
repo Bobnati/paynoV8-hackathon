@@ -35,11 +35,6 @@
     padding: 8px 12px;
 }
 
-.alreadyRegistered {
-
-
-}
-
 .dateOfBirth {
 
     color:black;
@@ -55,4 +50,7 @@
     background-color: var(--button-bgd);
 }
 
+.errorMessage {
 
+    color: red;
+}

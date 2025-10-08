@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router-dom"
 import '../styles/globals.css'
 import '../styles/signup.css'
 
@@ -12,9 +13,18 @@ const Signup = () => {
 
     const [date, setDate] = useState("");
 
+    const [error, setError] = useState("")
+
     function processSignUp (event) {
 
         event.preventDefault();
+
+        if(!lastName || !firstName || !email || !date) {
+
+            setError("All fields are required");
+        }
+
+        setError("");
 
         console.log("submitted");
 
@@ -72,25 +82,26 @@ const Signup = () => {
                 Create A New Account 
             </h2>
 
-            <p className='alreadyRegistered'> Already Registered? Log in</p>
+            {/* <p className='alreadyRegistered'> Already Registered? <Limk to="/login"> Log in instead </Limk> </p> */}
 
             <form className="signUpForm" onSubmit = {processSignUp}>
 
+                  {error && <p className="errorMessage">{error}</p>}
+
                 {userFields.map(eachField => (
                    
-                   <>
+                   <div   key = {eachField.id} className='form-group'>
                     <label> {eachField.label.toUpperCase()}   </label>
 
                         <input
                                 className= {eachField.id}
                                 id = {eachField.id}
-                                key = {eachField.id}
                                 type = {eachField.type}
                                 placeholder= {eachField.placeholder}
                                 value = {eachField.value}
                                 onChange={event => eachField.onChange(event.target.value)}
                         />
-                    </>
+                    </div>
                         )
                 )}
                 
