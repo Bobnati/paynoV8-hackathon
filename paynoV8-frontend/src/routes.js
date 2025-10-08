@@ -46,6 +46,7 @@ import SignUp from "layouts/authentication/sign-up";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import Transaction from "layouts/payments/components/Transaction";
 
 const routes = [
   {
@@ -90,6 +91,14 @@ const routes = [
     icon: <Icon fontSize="small">person</Icon>,
     route: "/profile",
     component: <Profile />,
+  },
+  {
+    type: "collapse",
+    name: "Transfer",
+    key: "trnsactions",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/transactions",
+    component: <Transaction />,
   },
   {
     type: "collapse",
