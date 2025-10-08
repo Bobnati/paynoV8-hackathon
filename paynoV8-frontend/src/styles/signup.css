@@ -1,0 +1,58 @@
+
+.form-container {
+
+    display: flex;
+    flex-direction: column;
+    column-gap: 10%;
+}
+
+.form-container {
+    display: block;
+    padding: 2%
+}
+
+.form-container input {
+
+    width: 80%;
+
+    padding: 8px 12px;
+
+    border: 2px solid var(--button-bgd);
+    
+    margin: 2px;
+
+    background-color: var(--input-bgd);
+
+    color: var(--primary-text-color);
+}
+
+.form-container label {
+
+    display: block;
+
+    text-align: left;
+
+    width: 80%;
+
+    padding: 8px 12px;
+}
+
+.dateOfBirth {
+
+    color:black;
+    background-color: black;
+}
+
+.submitBtn {
+
+    width: 90%;
+
+    margin-top: 20px;
+
+    background-color: var(--button-bgd);
+}
+
+.errorMessage {
+
+    color: red;
+}
