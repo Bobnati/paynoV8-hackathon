@@ -34,6 +34,11 @@ public class User {
     private String email;
     @NonNull
     private String passwordHash;
+    @NonNull
+    private String gender;
+    @NonNull
+    private String address;
+    private String accountNumber;
 
     private Role role;
     private BigDecimal walletBalance;  // Main wallet
