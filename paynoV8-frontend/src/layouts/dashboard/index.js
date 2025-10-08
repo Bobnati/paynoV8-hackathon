@@ -113,39 +113,46 @@ function Dashboard() {
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mb={3}>
-                <ReportsBarChart
-                  color="info"
-                  title="website views"
-                  description="Last Campaign Performance"
-                  date="campaign sent 2 days ago"
-                  chart={reportsBarChartData}
-                />
+                <ComplexStatisticsCard
+                color="success"
+                icon="savings"
+                title="Lifetime Savings"
+                count="N234,000"
+                percentage={{
+                  color: "success",
+                  amount: "+55%",
+                  label: "since last month",
+                }}
+              />
               </MDBox>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mb={3}>
-                <ReportsLineChart
-                  color="success"
-                  title="daily sales"
-                  description={
-                    <>
-                      (<strong>+15%</strong>) increase in today sales.
-                    </>
-                  }
-                  date="updated 4 min ago"
-                  chart={sales}
-                />
+                <ComplexStatisticsCard
+                icon="groups"
+                title="Active Bill Splits"
+                count="8"
+                percentage={{
+                  color: "success",
+                  amount: "3",
+                  label: "pending settlements"
+                }}
+              />
               </MDBox>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mb={3}>
-                <ReportsLineChart
-                  color="dark"
-                  title="completed tasks"
-                  description="Last Campaign Performance"
-                  date="just updated"
-                  chart={tasks}
-                />
+                <ComplexStatisticsCard
+                color="primary"
+                icon="paid"
+                title="Recent Transactions"
+                count="12"
+                percentage={{
+                  color: "success",
+                  amount: "+3",
+                  label: "in the last 24 hours"
+                }}
+              />
               </MDBox>
             </Grid>
           </Grid>
