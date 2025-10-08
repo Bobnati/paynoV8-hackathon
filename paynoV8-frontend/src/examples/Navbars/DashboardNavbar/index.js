@@ -1,18 +1,3 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
 import { useState, useEffect } from "react";
 
 // react-router components
@@ -21,39 +6,124 @@ import { useLocation, Link } from "react-router-dom";
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
 
-// @material-ui core components
+// @mui material components
 import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Icon from "@mui/material/Icon";
+
+// Material Dashboard 2 React components
+import MDBox from "components/MDBox";
+
+// Material Dashboard 2 React example components
+import Breadcrumbs from "examples/Breadcrumbs";
+
+import {
+  useMaterialUIController, setTransparentNavbar, setMiniSidenav,
+  setOpenConfigurator
+} from "context";
+
+// Custom styles for DashboardNavbar
+import {
+  navbar,
+  navbarContainer,
+  navbarRow,
+  navbarIconButton,
+  navbarMobileMenu,
+} from "examples/Navbars/DashboardNavbar/styles";
+
 
 function DashboardNavbar({ absolute, light, isMini }) {
-  const [navbarType, setNavbarType] = useState("sticky");
-  const [transparentNavbar, setTransparentNavbar] = useState(false);
-  const { pathname } = useLocation();
+  const [navbarType, setNavbarType] = useState();
+  const [controller, dispatch] = useMaterialUIController();
+  const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator, darkMode } = controller;
+  const [openMenu, setOpenMenu] = useState(false);
+  const route = useLocation().pathname.split("/").slice(1);
 
   useEffect(() => {
-    // Setting the navbar type based on scroll
-    function handleScroll() {
-      if (window.scrollY === 0) {
-        setNavbarType("sticky");
-        setTransparentNavbar(true);
-      } else {
-        setNavbarType("static");
-        setTransparentNavbar(false);
-      }
+    // Setting the navbar type
+    if (fixedNavbar) {
+      setNavbarType("sticky");
+    } else {
+      setNavbarType("static");
     }
 
-    window.addEventListener("scroll", handleScroll);
+    // A function that sets the transparent state of the navbar.
+    function handleTransparentNavbar() {
+      setTransparentNavbar(dispatch, (fixedNavbar && window.scrollY === 0) || !fixedNavbar);
+    }
 
-    // Clean up the event listener
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [pathname]);
+    /** 
+     The event listener that's calling the handleTransparentNavbar function when 
+     scrolling the window.
+    */
+    window.addEventListener("scroll", handleTransparentNavbar);
+
+    // Call the handleTransparentNavbar function to set the state with the initial value.
+    handleTransparentNavbar();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener("scroll", handleTransparentNavbar);
+  }, [dispatch, fixedNavbar]);
+
+  const handleMiniSidenav = () => setMiniSidenav(dispatch, !miniSidenav);
+  const handleConfiguratorOpen = () => setOpenConfigurator(dispatch, !openConfigurator);
+  const handleOpenMenu = (event) => setOpenMenu(event.currentTarget);
+  const handleCloseMenu = () => setOpenMenu(false);
+
+  // Styles for the navbar icons
+  const iconsStyle = ({ palette: { dark, white, text }, functions: { rgba } }) => ({
+    color: () => {
+      let colorValue = light || darkMode ? white.main : dark.main;
+
+      if (transparentNavbar) {
+        colorValue = darkMode ? rgba(text.main, 0.6) : text.main;
+      }
+
+      return colorValue;
+    },
+  });
 
   return (
     <AppBar
       position={absolute ? "absolute" : navbarType}
       color="inherit"
-      // ...existing props...
+      sx={(theme) => navbar(theme, { transparentNavbar, absolute, light, darkMode })}
     >
-      {/* ...existing navbar content... */}
+      <Toolbar sx={(theme) => navbarContainer(theme)}>
+        <MDBox color="inherit" mb={{ xs: 1, md: 0 }} sx={(theme) => navbarRow(theme, { isMini })}>
+          <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={light} />
+        </MDBox>
+        {isMini ? null : (
+          <MDBox sx={(theme) => navbarRow(theme, { isMini })}>
+            <MDBox color={light ? "white" : "inherit"}>
+              <Link to="/authentication/sign-in/basic">
+                <IconButton sx={navbarIconButton} size="small" disableRipple>
+                  <Icon sx={iconsStyle}>account_circle</Icon>
+                </IconButton>
+              </Link>
+              <IconButton
+                size="small"
+                disableRipple
+                color="inherit"
+                sx={navbarMobileMenu}
+                onClick={handleMiniSidenav}
+              >
+                <Icon sx={iconsStyle}>menu</Icon>
+              </IconButton>
+              <IconButton
+                size="small"
+                disableRipple
+                color="inherit"
+                sx={navbarIconButton}
+                onClick={handleConfiguratorOpen}
+              >
+                <Icon sx={iconsStyle}>settings</Icon>
+              </IconButton>
+            </MDBox>
+          </MDBox>
+        )}
+      </Toolbar>
     </AppBar>
   );
 }

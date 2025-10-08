@@ -14,14 +14,21 @@ import MDTypography from "components/MDTypography";
 import DataTable from "examples/Tables/DataTable";
 
 // Data
-import data from "layouts/dashboard/components/Projects/data";
+import data from "layouts/dashboard/components/Transactions/data";
 
-function Projects() {
+
+function Transactions() {
   const { columns, rows } = data();
   const [menu, setMenu] = useState(null);
+  const [filterType, setFilterType] = useState("all");
 
   const openMenu = ({ currentTarget }) => setMenu(currentTarget);
   const closeMenu = () => setMenu(null);
+
+  const handleFilter = (type) => {
+    setFilterType(type);
+    closeMenu();
+  };
 
   const renderMenu = (
     <Menu
@@ -38,9 +45,10 @@ function Projects() {
       open={Boolean(menu)}
       onClose={closeMenu}
     >
-      <MenuItem onClick={closeMenu}>Action</MenuItem>
-      <MenuItem onClick={closeMenu}>Another action</MenuItem>
-      <MenuItem onClick={closeMenu}>Something else</MenuItem>
+      <MenuItem onClick={() => handleFilter("all")}>Show All</MenuItem>
+      <MenuItem onClick={() => handleFilter("savings")}>Savings Only</MenuItem>
+      <MenuItem onClick={() => handleFilter("billsplit")}>Bill Splits Only</MenuItem>
+      <MenuItem onClick={() => handleFilter("groupsavings")}>Group Savings Only</MenuItem>
     </Menu>
   );
 
@@ -49,7 +57,7 @@ function Projects() {
       <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
         <MDBox>
           <MDTypography variant="h6" gutterBottom>
-            Projects
+            Recent Transactions
           </MDTypography>
           <MDBox display="flex" alignItems="center" lineHeight={0}>
             <Icon
@@ -59,10 +67,10 @@ function Projects() {
                 mt: -0.5,
               }}
             >
-              done
+              paid
             </Icon>
             <MDTypography variant="button" fontWeight="regular" color="text">
-              &nbsp;<strong>30 done</strong> this month
+              &nbsp;<strong>30</strong> transactions this month
             </MDTypography>
           </MDBox>
         </MDBox>
@@ -79,11 +87,11 @@ function Projects() {
           showTotalEntries={false}
           isSorted={false}
           noEndBorder
-          entriesPerPage={false}
+          entriesPerPage={5}
         />
       </MDBox>
     </Card>
   );
 }
 
-export default Projects;
+export default Transactions;

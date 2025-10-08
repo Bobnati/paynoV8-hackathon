@@ -71,7 +71,7 @@ export default function App() {
 
   //set page title
 
-   useEffect(() => {
+  useEffect(() => {
     document.title = "PaynoV8 Dashboard";
   }, []);
 
