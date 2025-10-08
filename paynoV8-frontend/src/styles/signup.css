@@ -21,7 +21,9 @@
     
     margin: 2px;
 
-    background-color: var(--input-bgd)
+    background-color: var(--input-bgd);
+
+    color: var(--primary-text-color);
 }
 
 .form-container label {

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import '../styles/globals.css'
 import '../styles/signup.css'
 
@@ -82,7 +82,7 @@ const Signup = () => {
                 Create A New Account 
             </h2>
 
-            {/* <p className='alreadyRegistered'> Already Registered? <Limk to="/login"> Log in instead </Limk> </p> */}
+            <p className='alreadyRegistered'> Already Registered? <Limk to="/login"> Log in instead </Limk> </p>
 
             <form className="signUpForm" onSubmit = {processSignUp}>
 
