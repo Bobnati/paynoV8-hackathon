@@ -1,6 +1,7 @@
 package com._paynov8.paynov8backend.user.service;
 
 import com._paynov8.paynov8backend.user.dto.LoginDto;
+import com._paynov8.paynov8backend.user.dto.LoginResponse;
 import com._paynov8.paynov8backend.user.dto.RegResponse;
 import com._paynov8.paynov8backend.user.dto.RegReqDto;
 

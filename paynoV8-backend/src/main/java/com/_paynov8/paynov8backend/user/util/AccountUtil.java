@@ -4,7 +4,7 @@ import java.time.Year;
 
 public class AccountUtil {
 
-    public static final String ACCOUNT_EXISTS_CODE = "201";
+    public static final String SUCCESS_CODE = "201";
     public static final String ACCOUNT_EXISTS_MESSAGE = "An account already exists with this email";
     public static final String ACCOUNT_CREATION_CODE = "200";
     public static final String ACCOUNT_SUCCESS_MESSAGE = "Account created successfully";

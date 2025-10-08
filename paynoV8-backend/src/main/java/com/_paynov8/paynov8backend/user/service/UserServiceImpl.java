@@ -1,7 +1,10 @@
 package com._paynov8.paynov8backend.user.service;
 
+import com._paynov8.paynov8backend.user.config.JwtTokenProvider;
 import com._paynov8.paynov8backend.emailService.EmailDetails;
 import com._paynov8.paynov8backend.emailService.IEmailService;
+import com._paynov8.paynov8backend.user.dto.LoginDto;
+import com._paynov8.paynov8backend.user.dto.LoginResponse;
 import com._paynov8.paynov8backend.user.dto.RegReqDto;
 import com._paynov8.paynov8backend.user.dto.RegResponse;
 import com._paynov8.paynov8backend.user.enums.Role;
@@ -9,10 +12,14 @@ import com._paynov8.paynov8backend.user.model.User;
 import com._paynov8.paynov8backend.user.repository.UserRepository;
 import com._paynov8.paynov8backend.user.util.AccountUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -24,6 +31,11 @@ public class UserServiceImpl implements UserService{
     PasswordEncoder passwordEncoder;
     @Autowired
     IEmailService emailService;
+    @Autowired
+    AuthenticationManager authenticationManager;
+    @Autowired
+    JwtTokenProvider jwtTokenProvider;
+
 
     @Override
     public RegResponse createAccount(RegReqDto request) {
@@ -31,7 +43,7 @@ public class UserServiceImpl implements UserService{
 
         if (foundUser.isPresent()) {
             return RegResponse.builder()
-                    .responseCode(AccountUtil.ACCOUNT_EXISTS_CODE)
+                    .responseCode(AccountUtil.SUCCESS_CODE)
                     .message(AccountUtil.ACCOUNT_EXISTS_MESSAGE)
                     .build();
         }
@@ -76,6 +88,28 @@ public class UserServiceImpl implements UserService{
                 .middleName(savedUser.getMiddleName())
                 .email(savedUser.getEmail())
                 .address(savedUser.getAddress())
+                .build();
+    }
+
+    @Override
+    public LoginResponse login(LoginDto loginDto) {
+        Authentication authentication = null;
+        authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword())
+        );
+
+        EmailDetails loginAlert = EmailDetails.builder()
+                .subject("Successful Login")
+                .recipient(loginDto.getEmail())
+                .messageBody("You have successfully logged into your account at " + LocalDateTime.now() + " " +
+                        "Please contact customer care if you did not initiate this request immediately.")
+                .build();
+
+        emailService.sendEmailAlert(loginAlert);
+
+        return LoginResponse.builder()
+                .statusCode(AccountUtil.SUCCESS_CODE)
+                .message(jwtTokenProvider.generateToken(authentication))
                 .build();
     }
 }
