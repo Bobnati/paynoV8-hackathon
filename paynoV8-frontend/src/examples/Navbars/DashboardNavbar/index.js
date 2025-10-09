@@ -40,6 +40,9 @@ function DashboardNavbar({ absolute, light, isMini }) {
   const [openMenu, setOpenMenu] = useState(false);
   const route = useLocation().pathname.split("/").slice(1);
 
+  const userData = JSON.parse(localStorage.getItem("authData"));
+  const user = userData.user;
+
   useEffect(() => {
     // Setting the navbar type
     if (fixedNavbar) {
@@ -94,7 +97,7 @@ function DashboardNavbar({ absolute, light, isMini }) {
         <MDBox color="inherit" mb={{ xs: 1, md: 0 }} sx={(theme) => navbarRow(theme, { isMini })}>
           <Breadcrumbs icon="home" title={route[route.length - 1]} route={route} light={light} />
           {/*user welcome message*/}
-          <span color={light ? "white" : "inherit"} >Welcome Back! Adedamola
+          <span color={light ? "white" : "inherit"} >Welcome Back! {user.name.split(" ")[0]}
           </span>
         </MDBox>
        

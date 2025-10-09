@@ -49,7 +49,7 @@ function Payments() {
                     icon="account_balance"
                     title="salary"
                     description="Belong Interactive"
-                    value="+$2000"
+                    value="+N20,000"
                   />
                 </Grid>
                 <Grid item xs={12} md={6} xl={3}>
@@ -57,7 +57,7 @@ function Payments() {
                     icon="paypal"
                     title="paypal"
                     description="Freelance Payment"
-                    value="$455.00"
+                    value="N4,455.00"
                   />
                 </Grid>
                 <Grid item xs={12}>

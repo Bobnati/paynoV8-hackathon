@@ -3,7 +3,7 @@
  */
 
 // API endpoint
-const SIGNUP_ENDPOINT = 'https://paynov8-hackathon-1.onrender.com/';
+const SIGNUP_ENDPOINT = 'https://paynov8-hackathon-1.onrender.com/api/v1/user/create';
 
 /**
  * Client-side form validation

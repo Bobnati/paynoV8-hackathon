@@ -32,6 +32,10 @@ import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
 
+  const userData = JSON.parse(localStorage.getItem("authData"));
+  const user = userData.user;
+  console.log(userData)
+
   return (
     <DashboardLayout>
       <DashboardNavbar />

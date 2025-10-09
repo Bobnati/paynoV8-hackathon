@@ -63,14 +63,14 @@ function Transactions() {
             icon="expand_more"
             name="Netflix"
             description="27 March 2020, at 12:30 PM"
-            value="- $ 2,500"
+            value="- N 2,500"
           />
           <Transaction
             color="success"
             icon="expand_less"
             name="Apple"
             description="27 March 2020, at 04:30 AM"
-            value="+ $ 2,000"
+            value="+ N 2,000"
           />
         </MDBox>
         <MDBox mt={1} mb={2}>
@@ -91,21 +91,21 @@ function Transactions() {
             icon="expand_less"
             name="Stripe"
             description="26 March 2020, at 13:45 PM"
-            value="+ $ 750"
+            value="+ N 750"
           />
           <Transaction
             color="success"
             icon="expand_less"
             name="HubSpot"
             description="26 March 2020, at 12:30 PM"
-            value="+ $ 1,000"
+            value="+ N 1,000"
           />
           <Transaction
             color="success"
             icon="expand_less"
             name="Creative Tim"
             description="26 March 2020, at 08:30 AM"
-            value="+ $ 2,500"
+            value="+ N 2,500"
           />
           <Transaction
             color="dark"
