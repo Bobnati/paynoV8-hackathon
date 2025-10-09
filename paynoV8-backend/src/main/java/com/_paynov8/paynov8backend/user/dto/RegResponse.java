@@ -13,6 +13,7 @@ public class RegResponse {
     private String lastName;
     private String phoneNumber;
     private String email;
+    private String accountNumber;
     private String gender;
     private String message;
     private String responseCode;
