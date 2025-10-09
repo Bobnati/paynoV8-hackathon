@@ -95,11 +95,11 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Profile",
-    key: "profile",
-    icon: <Icon fontSize="small">person</Icon>,
-    route: "/profile",
-    component: <Profile />,
+    name: "Log Out",
+    key: "Sign-in",
+    icon: <Icon fontSize="small">login</Icon>,
+    route: "/authentication/Sign-in",
+    component: <SignIn />,
   },
 ];
 
