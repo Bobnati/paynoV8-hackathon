@@ -27,21 +27,21 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Group addMember(String groupId, String userId) {
+    public Group addMember(String groupId, String accountNumber) {
         Group group = groupRepository.findById(groupId)
                 .orElseThrow(() -> new RuntimeException("Group not found"));
 
-        if (group.getMemberIds().contains(userId)) throw new ResourceAllReadyExistException("Member already exist");
+        if (group.getMemberIds().contains(accountNumber)) throw new ResourceAllReadyExistException("Member already exist");
 
-        group.getMemberIds().add(userId);
+        group.getMemberIds().add(accountNumber);
         groupRepository.save(group);
 
         return group;
     }
 
     @Override
-    public List<Group> getUserGroups(String userId) {
-        return groupRepository.findByMemberIdsContaining(userId);
+    public List<Group> getUserGroups(String accountNumber) {
+        return groupRepository.findByMemberIdsContaining(accountNumber);
     }
 
     @Override

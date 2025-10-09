@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,6 @@ public class SplitPaymentRequest {
     private String voiceNoteUrl;
     private SplitType splitType;
     private Map<String, BigDecimal> customSplits;
-    private List<String> participantIds;
+    private List<String> participantIds = new ArrayList<>();
 
 }
