@@ -7,6 +7,9 @@
 // @mui material components
 import Card from "@mui/material/Card";
 
+// react-router-dom components
+import { Link } from "react-router-dom";
+
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -23,18 +26,22 @@ function OrdersOverview() {
         </MDTypography>
       </MDBox>
       <MDBox p={2}>
-        <TimelineItem
-          color="info"
-          icon="send"
-          title="Send Money"
-          dateTime="Transfer funds to friends and family"
-        />
-        <TimelineItem
-          color="success"
-          icon="receipt_long"
-          title="Split Bills"
-          dateTime="Divide expenses with your paying circle"
-        />
+        <Link to="/transactions/send" style={{ textDecoration: 'none' }}>
+          <TimelineItem
+            color="info"
+            icon="send"
+            title="Send Money"
+            dateTime="Transfer funds to friends and family"
+          />
+        </Link>
+        <Link to="/transactions/split" style={{ textDecoration: 'none' }}>
+          <TimelineItem
+            color="success"
+            icon="receipt_long"
+            title="Split Bills"
+            dateTime="Divide expenses with your paying circle"
+          />
+        </Link>
         <TimelineItem
           color="primary"
           icon="smart_toy"
