@@ -1,26 +1,11 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import TransactionForm from './TransactionForm';
 import TransactionList from './TransactionList';
+import TransferSplit from './TransferSplit';
 import './styles/Transaction.css';
 
 const Transaction = () => {
   const [activeView, setActiveView] = useState('list'); // 'list', 'send', 'split'
-  const [theme, setTheme] = useState('light');
-
-  // Split Bill Placeholder Component
-  const SplitBillPlaceholder = ({ onBack }) => (
-    <div className="split-bill-placeholder">
-      <div className="placeholder-content">
-        <div className="placeholder-icon">🧾</div>
-        <h2>Split Bill</h2>
-        <p>Split bills with friends and family. This feature is coming soon!</p>
-        <button className="btn-primary" onClick={onBack}>
-          Back to Transactions
-        </button>
-      </div>
-    </div>
-  );
 
   // Views configuration
   const views = {
@@ -32,55 +17,24 @@ const Transaction = () => {
     },
     send: {
       title: 'Send Money',
-      component: <TransactionForm colorTheme={theme} />,
+      component: <TransactionForm />, // No need to pass theme - it will inherit
       icon: '💸',
       description: 'Transfer money to friends and family'
     },
     split: {
-      title: 'Split Bill',
-      component: <SplitBillPlaceholder onBack={() => setActiveView('list')} />,
+      title: 'Split Payment',
+      component: <TransferSplit />,
       icon: '🧾',
-      description: 'Split expenses with multiple people'
+      description: 'Split bills with group members'
     }
   };
-
-  // Detect system theme preference
-  /* useEffect(() => {
-     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-     setTheme(mediaQuery.matches ? 'dark' : 'light');
- 
-     const handleChange = (e) => {
-       setTheme(e.matches ? 'dark' : 'light');
-     };
- 
-     mediaQuery.addEventListener('change', handleChange);
-     return () => mediaQuery.removeEventListener('change', handleChange);
-   }, []);*/
 
   const currentView = views[activeView];
 
   return (
-    <div className="transaction-container" data-theme={theme}>
-      {/* Header */}
+    <div className="transaction-container">
+      {/* Header - Remove theme toggle since it's controlled globally */}
       <header className="transaction-header">
-        {/*
-        <div className="header-content">
-          <div className="header-title">
-            <h1>Payments</h1>
-            <p>Manage your transactions and payments</p>
-          </div>
-          
-          <div className="header-actions">
-            // Theme Toggle 
-            <button 
-              className="theme-toggle"
-              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-              title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-            >
-              {theme === 'light' ? '🌙' : '☀️'}
-            </button>
-          </div>
-        </div>*/}
 
         {/* Navigation Tabs */}
         <nav className="transaction-nav">
@@ -92,7 +46,7 @@ const Transaction = () => {
               <span className="tab-icon">📋</span>
               <span className="tab-label">Transactions</span>
             </button>
-
+            
             <button
               className={`nav-tab ${activeView === 'send' ? 'active' : ''}`}
               onClick={() => setActiveView('send')}
@@ -100,7 +54,7 @@ const Transaction = () => {
               <span className="tab-icon">💸</span>
               <span className="tab-label">Send Money</span>
             </button>
-
+            
             <button
               className={`nav-tab ${activeView === 'split' ? 'active' : ''}`}
               onClick={() => setActiveView('split')}
@@ -136,7 +90,7 @@ const Transaction = () => {
           <span className="mobile-nav-icon">📋</span>
           <span className="mobile-nav-label">Transactions</span>
         </button>
-
+        
         <button
           className={`mobile-nav-item ${activeView === 'send' ? 'active' : ''}`}
           onClick={() => setActiveView('send')}
@@ -144,7 +98,7 @@ const Transaction = () => {
           <span className="mobile-nav-icon">💸</span>
           <span className="mobile-nav-label">Send</span>
         </button>
-
+        
         <button
           className={`mobile-nav-item ${activeView === 'split' ? 'active' : ''}`}
           onClick={() => setActiveView('split')}
