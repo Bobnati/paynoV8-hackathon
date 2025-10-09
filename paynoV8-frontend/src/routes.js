@@ -2,7 +2,7 @@
 
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
-import User from "layouts/user";
+import Savings from "layouts/savings";
 import Payments from "layouts/payments";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
@@ -12,7 +12,6 @@ import SignUp from "layouts/authentication/sign-up";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
-import Transaction from "layouts/payments/components/Transaction";
 
 const routes = [
 
@@ -26,11 +25,11 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "User",
-    key: "User",
-    icon: <Icon fontSize="small">people</Icon>,
-    route: "/User",
-    component: <User />,
+    name: "Savings",
+    key: "Savings",
+    icon: <Icon fontSize="small">savings</Icon>,
+    route: "/savings",
+    component: <Savings />,
   },
   {
     type: "collapse",
@@ -39,6 +38,14 @@ const routes = [
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/Payments",
     component: <Payments />,
+  },
+  {
+    type: "collapse",
+    name: "Transfer",
+    key: "transactions",
+    icon: <Icon fontSize="small">send</Icon>,
+    route: "/transactions",
+    component: <Transfer />,
   },
   {
     type: "collapse",
@@ -51,17 +58,10 @@ const routes = [
   {
     type: "divider",
   },
+
   {
-    type: "collapse",
-    name: "Profile",
-    key: "profile",
-    icon: <Icon fontSize="small">person</Icon>,
-    route: "/profile",
-    component: <Profile />,
-  },
-  {
-    type: "collapse",
-    name: "Transactions",
+    type: "hidden",
+    name: "Transaction History",
     key: "transactions",
     icon: <Icon fontSize="small">send</Icon>,
     route: "/transactions",
@@ -76,19 +76,11 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Sign In",
-    key: "sign-in",
+    name: "Log Out",
+    key: "Sign-in",
     icon: <Icon fontSize="small">login</Icon>,
-    route: "/authentication/sign-in",
+    route: "/authentication/Sign-in",
     component: <SignIn />,
-  },
-  {
-    type: "collapse",
-    name: "Sign Up",
-    key: "sign-up",
-    icon: <Icon fontSize="small">assignment</Icon>,
-    route: "/authentication/sign-up",
-    component: <SignUp />,
   },
 ];
 
