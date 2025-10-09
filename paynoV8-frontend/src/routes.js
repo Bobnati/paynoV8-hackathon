@@ -101,6 +101,12 @@ const routes = [
     route: "/authentication/Sign-in",
     component: <SignIn />,
   },
+  {
+    type: "collapse",
+    key: "Sign-up",
+    route: "/authentication/Sign-up",
+    component: <SignUp />,
+  },
 ];
 
 export default routes;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTransactionForm } from './useTransactionForm';
-import { useAudioCompression } from './hooks/useAudioCompression';
-import voiceService from './services/voiceService';
+import { useAudioCompression } from '../hooks/useAudioCompression';
+import voiceService from '../services/voiceService';
 import VoiceRecorder from './voice/VoiceRecorder';
 import VoicePlayer from './voice/VoicePlayer';
 import './styles/TransactionForm.css';

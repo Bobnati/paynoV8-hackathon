@@ -146,7 +146,6 @@ function SendMoney() {
           </Grid>
         </Grid>
       </MDBox>
-      <Footer />
     </DashboardLayout>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import TransactionItem from './TransactionItem';
 import TransactionFilters from './TransactionFilters';
 import './styles/TransactionList.css';
+import Card from "@mui/material/Card";
 
 const TransactionList = () => {
   const [transactions, setTransactions] = useState([]);
@@ -181,7 +182,7 @@ const TransactionList = () => {
   }
 
   return (
-    <div className="transaction-list">
+    <Card>
       {/* Header Section */}
       <div className="list-header">
         <div className="header-content">
@@ -259,7 +260,7 @@ const TransactionList = () => {
           </div>
         </div>
       )}
-    </div>
+    </Card>
   );
 };
 
