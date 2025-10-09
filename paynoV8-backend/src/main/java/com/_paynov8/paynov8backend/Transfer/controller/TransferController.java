@@ -1,4 +1,4 @@
-package com._paynov8.paynov8backend.Transfer.controller;
+package com._paynov8.paynov8backend.transfer.controller;
 
 public class TransferController {
 }

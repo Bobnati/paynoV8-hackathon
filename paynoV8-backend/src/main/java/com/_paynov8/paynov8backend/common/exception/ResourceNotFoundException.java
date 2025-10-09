@@ -1,0 +1,7 @@
+package com._paynov8.paynov8backend.common.exception;
+
+public class ResourceNotFoundException extends RuntimeException{
+    public ResourceNotFoundException(String message){
+        super(message);
+    }
+}
