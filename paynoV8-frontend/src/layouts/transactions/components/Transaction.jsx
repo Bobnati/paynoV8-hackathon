@@ -32,7 +32,7 @@ const Transaction = () => {
     },
     send: {
       title: 'Send Money',
-      component: <TransactionForm  colorTheme={theme} />,
+      component: <TransactionForm colorTheme={theme} />,
       icon: '💸',
       description: 'Transfer money to friends and family'
     },
@@ -45,17 +45,17 @@ const Transaction = () => {
   };
 
   // Detect system theme preference
- /* useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setTheme(mediaQuery.matches ? 'dark' : 'light');
-
-    const handleChange = (e) => {
-      setTheme(e.matches ? 'dark' : 'light');
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);*/
+  /* useEffect(() => {
+     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+     setTheme(mediaQuery.matches ? 'dark' : 'light');
+ 
+     const handleChange = (e) => {
+       setTheme(e.matches ? 'dark' : 'light');
+     };
+ 
+     mediaQuery.addEventListener('change', handleChange);
+     return () => mediaQuery.removeEventListener('change', handleChange);
+   }, []);*/
 
   const currentView = views[activeView];
 
@@ -92,7 +92,7 @@ const Transaction = () => {
               <span className="tab-icon">📋</span>
               <span className="tab-label">Transactions</span>
             </button>
-            
+
             <button
               className={`nav-tab ${activeView === 'send' ? 'active' : ''}`}
               onClick={() => setActiveView('send')}
@@ -100,7 +100,7 @@ const Transaction = () => {
               <span className="tab-icon">💸</span>
               <span className="tab-label">Send Money</span>
             </button>
-            
+
             <button
               className={`nav-tab ${activeView === 'split' ? 'active' : ''}`}
               onClick={() => setActiveView('split')}
@@ -136,7 +136,7 @@ const Transaction = () => {
           <span className="mobile-nav-icon">📋</span>
           <span className="mobile-nav-label">Transactions</span>
         </button>
-        
+
         <button
           className={`mobile-nav-item ${activeView === 'send' ? 'active' : ''}`}
           onClick={() => setActiveView('send')}
@@ -144,7 +144,7 @@ const Transaction = () => {
           <span className="mobile-nav-icon">💸</span>
           <span className="mobile-nav-label">Send</span>
         </button>
-        
+
         <button
           className={`mobile-nav-item ${activeView === 'split' ? 'active' : ''}`}
           onClick={() => setActiveView('split')}
