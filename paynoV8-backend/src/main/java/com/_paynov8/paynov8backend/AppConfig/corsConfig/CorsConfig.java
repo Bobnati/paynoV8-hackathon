@@ -16,7 +16,7 @@ public class CorsConfig {
                 registry.addMapping("/**") // apply to all routes
                         .allowedOrigins(
                                 "https://paynov8-init-58q906x5j-bobnatis-projects.vercel.app/dashboard",
-                                "http://localhost:8080"
+                                "http://localhost:3000"
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
