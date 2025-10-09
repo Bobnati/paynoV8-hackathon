@@ -76,6 +76,14 @@ const routes = [
   },
   {
     type: "collapse",
+    name: "Transfer",
+    key: "transactions",
+    icon: <Icon fontSize="small">send</Icon>,
+    route: "/transactions",
+    component: <Transfer />,
+  },
+  {
+    type: "collapse",
     name: "Notifications",
     key: "notifications",
     icon: <Icon fontSize="small">notifications</Icon>,
@@ -92,30 +100,6 @@ const routes = [
     icon: <Icon fontSize="small">person</Icon>,
     route: "/profile",
     component: <Profile />,
-  },
-  {
-    type: "collapse",
-    name: "Transfer",
-    key: "trnsactions",
-    icon: <Icon fontSize="small">send</Icon>,
-    route: "/transactions",
-    component: <Transfer />,
-  },
-  {
-    type: "collapse",
-    name: "Sign In",
-    key: "sign-in",
-    icon: <Icon fontSize="small">login</Icon>,
-    route: "/authentication/sign-in",
-    component: <SignIn />,
-  },
-  {
-    type: "collapse",
-    name: "Sign Up",
-    key: "sign-up",
-    icon: <Icon fontSize="small">assignment</Icon>,
-    route: "/authentication/sign-up",
-    component: <SignUp />,
   },
 ];
 
