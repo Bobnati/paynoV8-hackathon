@@ -11,6 +11,7 @@ import com._paynov8.paynov8backend.user.enums.Role;
 import com._paynov8.paynov8backend.user.model.User;
 import com._paynov8.paynov8backend.user.repository.UserRepository;
 import com._paynov8.paynov8backend.user.util.AccountUtil;
+import com._paynov8.paynov8backend.wallet.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,6 +37,9 @@ public class UserServiceImpl implements UserService{
     @Autowired
     JwtTokenProvider jwtTokenProvider;
 
+    @Autowired
+    WalletService walletService;
+
 
     @Override
     public RegResponse createAccount(RegReqDto request) {
@@ -54,6 +58,7 @@ public class UserServiceImpl implements UserService{
                 .lastName(request.getLastName())
                 .gender(request.getGender())
                 .address(request.getAddress())
+                .phoneNumber(request.getPhoneNumber())
                 .accountNumber(AccountUtil.generateAccountNumber())
                 .phoneNumber(request.getPhoneNumber())
                 .walletBalance(BigDecimal.ZERO)
@@ -64,28 +69,32 @@ public class UserServiceImpl implements UserService{
                 .build();
 
         User savedUser = userRepository.save(newUser);
+        walletService.createWalletForUser(savedUser.getId(), savedUser.getAccountNumber());
 
-        EmailDetails emailDetails = EmailDetails.builder()
-                .recipient(savedUser.getEmail())
-                .subject("Welcome To Ojemba Bank Plc.")
-                .messageBody("Hello " + savedUser.getFirstName() + " " + savedUser.getMiddleName() + " " + savedUser.getLastName() + ",\n" +
-                        "We want to specially thank you for choosing PaynoV8. Indeed, we stand true to our name as we promise you a jolly ride. \n" +
-                        "Kindly find your account details below: \n" +
-                        "Account Number: " + savedUser.getAccountNumber() + ",\n" +
-                        "Account Balance: NGN" + savedUser.getWalletBalance() + ".00\n" +
-                        "PLEASE FEEL FREE TO REACH OUT TO US FOR ANY ENQUIRIES THROUGH ANY OF OUR CHANNELS.\n" +
-                        "\n Kind regards,\n" +
-                        "Chukwu Joel Chimaobi\n" +
-                        "Head, Customer Success Dept!")
-                .build();
+//        EmailDetails emailDetails = EmailDetails.builder()
+//                .recipient(savedUser.getEmail())
+//                .subject("Welcome To PaynoV8 Plc.")
+//                .messageBody("Hello " + savedUser.getFirstName() + " " + savedUser.getMiddleName() + " " + savedUser.getLastName() + ",\n" +
+//                        "We want to specially thank you for choosing PaynoV8. Indeed, we stand true to our name as we promise you a jolly ride. \n" +
+//                        "Kindly find your account details below: \n" +
+//                        "Account Number: " + savedUser.getAccountNumber() + ",\n" +
+//                        "Account Balance: NGN" + savedUser.getWalletBalance() + ".00\n" +
+//                        "PLEASE FEEL FREE TO REACH OUT TO US FOR ANY ENQUIRIES THROUGH ANY OF OUR CHANNELS.\n" +
+//                        "\n Kind regards,\n" +
+//                        "Chukwu Joel Chimaobi\n" +
+//                        "Head, Customer Success Dept!")
+//                .build();
+//
+//        emailService.sendEmailAlert(emailDetails);
 
-        emailService.sendEmailAlert(emailDetails);
 
         return RegResponse.builder()
+                .userId(savedUser.getId())
                 .responseCode(AccountUtil.ACCOUNT_CREATION_CODE)
                 .message(AccountUtil.ACCOUNT_SUCCESS_MESSAGE)
                 .firstName(savedUser.getFirstName())
                 .lastName(savedUser.getLastName())
+                .accountNumber(savedUser.getAccountNumber())
                 .middleName(savedUser.getMiddleName())
                 .email(savedUser.getEmail())
                 .address(savedUser.getAddress())
@@ -100,14 +109,14 @@ public class UserServiceImpl implements UserService{
                 new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword())
         );
 
-        EmailDetails loginAlert = EmailDetails.builder()
-                .subject("Successful Login")
-                .recipient(loginDto.getEmail())
-                .messageBody("You have successfully logged into your account at " + LocalDateTime.now() + " " +
-                        "Please contact customer care if you did not initiate this request immediately.")
-                .build();
-
-        emailService.sendEmailAlert(loginAlert);
+//        EmailDetails loginAlert = EmailDetails.builder()
+//                .subject("Successful Login")
+//                .recipient(loginDto.getEmail())
+//                .messageBody("You have successfully logged into your account at " + LocalDateTime.now() + " " +
+//                        "Please contact customer care if you did not initiate this request immediately.")
+//                .build();
+//
+//        emailService.sendEmailAlert(loginAlert);
 
         return LoginResponse.builder()
                 .statusCode(AccountUtil.SUCCESS_CODE)
