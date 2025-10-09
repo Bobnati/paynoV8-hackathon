@@ -18,4 +18,5 @@ public class RegResponse {
     private String message;
     private String responseCode;
     private String address;
+    private String accountNumber;
 }

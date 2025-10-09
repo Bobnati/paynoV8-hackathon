@@ -60,6 +60,7 @@ public class UserServiceImpl implements UserService{
                 .address(request.getAddress())
                 .phoneNumber(request.getPhoneNumber())
                 .accountNumber(AccountUtil.generateAccountNumber())
+                .phoneNumber(request.getPhoneNumber())
                 .walletBalance(BigDecimal.ZERO)
                 .savingsBalance(BigDecimal.ZERO)
                 .email(request.getEmail())
@@ -86,6 +87,7 @@ public class UserServiceImpl implements UserService{
 //
 //        emailService.sendEmailAlert(emailDetails);
 
+
         return RegResponse.builder()
                 .responseCode(AccountUtil.ACCOUNT_CREATION_CODE)
                 .message(AccountUtil.ACCOUNT_SUCCESS_MESSAGE)
@@ -95,6 +97,7 @@ public class UserServiceImpl implements UserService{
                 .middleName(savedUser.getMiddleName())
                 .email(savedUser.getEmail())
                 .address(savedUser.getAddress())
+                .accountNumber(savedUser.getAccountNumber())
                 .build();
     }
 
