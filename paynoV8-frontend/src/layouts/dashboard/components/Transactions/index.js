@@ -57,7 +57,7 @@ function Transactions() {
       <MDBox display="flex" justifyContent="space-between" alignItems="center" p={3}>
         <MDBox>
           <MDTypography variant="h6" gutterBottom>
-            Recent Transactions
+            Recent Activity
           </MDTypography>
           <MDBox display="flex" alignItems="center" lineHeight={0}>
             <Icon

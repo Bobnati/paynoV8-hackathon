@@ -31,6 +31,16 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 
+// --- Mock Notification Data ---
+const nigerianNames = [
+  "Adewale Akinyemi", "Bolanle Ojo", "Chinedu Okoro", "Dolapo Adebayo", "Emeka Nwosu",
+  "Funmilayo Oladele", "Gbenga Adekunle", "Habiba Ibrahim", "Ifeanyi Eze", "Jide Sanusi"
+];
+
+const getRandomName = () => nigerianNames[Math.floor(Math.random() * nigerianNames.length)];
+const generateRandomId = () => `PAY${Math.floor(1000 + Math.random() * 9000)}`;
+
+
 function Notifications() {
   const [successSB, setSuccessSB] = useState(false);
   const [infoSB, setInfoSB] = useState(false);
@@ -61,7 +71,7 @@ function Notifications() {
       color="success"
       icon="check"
       title="Material Dashboard"
-      content="Hello, world! This is a notification message"
+      content={`${getRandomName()} (ID: ${generateRandomId()}) just sent you money.`}
       dateTime="11 mins ago"
       open={successSB}
       onClose={closeSuccessSB}
@@ -74,7 +84,7 @@ function Notifications() {
     <MDSnackbar
       icon="notifications"
       title="Material Dashboard"
-      content="Hello, world! This is a notification message"
+      content={`${getRandomName()} (ID: ${generateRandomId()}) invited you to their paying circle.`}
       dateTime="11 mins ago"
       open={infoSB}
       onClose={closeInfoSB}
@@ -87,7 +97,7 @@ function Notifications() {
       color="warning"
       icon="star"
       title="Material Dashboard"
-      content="Hello, world! This is a notification message"
+      content={`${getRandomName()} (ID: ${generateRandomId()}) wants to share a bill with you.`}
       dateTime="11 mins ago"
       open={warningSB}
       onClose={closeWarningSB}
@@ -101,7 +111,7 @@ function Notifications() {
       color="error"
       icon="warning"
       title="Material Dashboard"
-      content="Hello, world! This is a notification message"
+      content={`${getRandomName()} (ID: ${generateRandomId()}) accepted your paying circle request.`}
       dateTime="11 mins ago"
       open={errorSB}
       onClose={closeErrorSB}

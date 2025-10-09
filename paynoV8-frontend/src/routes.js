@@ -3,7 +3,7 @@
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
 import Savings from "layouts/savings";
-import Payments from "layouts/payments";
+import PayingCircles from "layouts/payments";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
 import Transfer from "layouts/transactions";
@@ -42,13 +42,13 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Payments",
-    key: "Payments",
-    icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/Payments",
+    name: "Paying Circles",
+    key: "paying-circles",
+    icon: <Icon fontSize="small">groups</Icon>,
+    route: "/paying-circles",
     component: (
       <ProtectedRoute>
-        <Payments />
+        <PayingCircles />
       </ProtectedRoute>
     ),
   },

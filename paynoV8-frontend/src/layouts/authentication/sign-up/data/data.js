@@ -3,7 +3,10 @@
  */
 
 // API endpoint
-const SIGNUP_ENDPOINT = 'http://localhost:8080/api/v1/user/create';
+
+const baseUrl = "https://paynov8-hackathon-1.onrender.com";
+
+const SIGNUP_ENDPOINT = `${baseUrl}/api/v1/user/create`;
 
 /**
  * Client-side form validation
