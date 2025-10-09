@@ -11,11 +11,18 @@ function ProtectedRoute({ children }) {
     const location = useLocation();
     let authDataString = localStorage.getItem("authData");
 
-    if (!authDataString) {
+    // if (!authDataString) {
 
-        // User is not logged in, redirect to sign-in page
-        return <Navigate to="/authentication/sign-in" state={{ from: location }} replace />;
-    }
+    //     const mockAuth = {
+    //   token: "dev-mock-token-12345",
+    //   user: { name: "Dev User", email: "dev@example.com" },
+    //   expiry: new Date().getTime() + 24 * 60 * 60 * 1000, // valid for 1 day
+    // };
+    // localStorage.setItem("authData", JSON.stringify(mockAuth));
+    // authDataString = JSON.stringify(mockAuth); 
+    //     // User is not logged in, redirect to sign-in page
+    //     return <Navigate to="/authentication/sign-in" state={{ from: location }} replace />;
+    // }
 
     const authData = JSON.parse(authDataString);
     const now = new Date().getTime();
