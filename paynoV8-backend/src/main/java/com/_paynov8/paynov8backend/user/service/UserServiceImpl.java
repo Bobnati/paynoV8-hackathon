@@ -55,6 +55,7 @@ public class UserServiceImpl implements UserService{
                 .gender(request.getGender())
                 .address(request.getAddress())
                 .accountNumber(AccountUtil.generateAccountNumber())
+                .phoneNumber(request.getPhoneNumber())
                 .walletBalance(BigDecimal.ZERO)
                 .savingsBalance(BigDecimal.ZERO)
                 .email(request.getEmail())
@@ -65,7 +66,7 @@ public class UserServiceImpl implements UserService{
         User savedUser = userRepository.save(newUser);
 
         EmailDetails emailDetails = EmailDetails.builder()
-                .recipient(savedUser.getFirstName())
+                .recipient(savedUser.getEmail())
                 .subject("Welcome To Ojemba Bank Plc.")
                 .messageBody("Hello " + savedUser.getFirstName() + " " + savedUser.getMiddleName() + " " + savedUser.getLastName() + ",\n" +
                         "We want to specially thank you for choosing PaynoV8. Indeed, we stand true to our name as we promise you a jolly ride. \n" +
@@ -88,6 +89,7 @@ public class UserServiceImpl implements UserService{
                 .middleName(savedUser.getMiddleName())
                 .email(savedUser.getEmail())
                 .address(savedUser.getAddress())
+                .accountNumber(savedUser.getAccountNumber())
                 .build();
     }
 
