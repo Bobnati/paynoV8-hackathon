@@ -1,0 +1,12 @@
+
+
+{
+
+  "endOfLine": "false",
+  "singleQuote": true,
+  "trailingComma": "none",
+  "arrowParens": "avoid",
+  "semi": false,
+  "parser": "babel"
+
+}
