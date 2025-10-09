@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
  */
 function ProtectedRoute({ children }) {
     const location = useLocation();
-    const authDataString = localStorage.getItem("authData");
+    let authDataString = localStorage.getItem("authData");
 
     if (!authDataString) {
 
