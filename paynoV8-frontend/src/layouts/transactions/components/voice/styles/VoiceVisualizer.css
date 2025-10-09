@@ -1,0 +1,81 @@
+.voice-visualizer {
+  position: relative;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin: var(--space-md) 0;
+}
+
+.visualizer-canvas {
+  width: 100%;
+  height: 80px;
+  display: block;
+}
+
+.visualizer-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: color-mix(in srgb, var(--bg-primary) 80%, transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Fallback for unsupported browsers */
+.voice-visualizer.fallback {
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.fallback-animation {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 2px;
+  height: 40px;
+  margin-bottom: var(--space-sm);
+}
+
+.fallback-bar {
+  width: 4px;
+  background: var(--accent-primary);
+  border-radius: 2px;
+  animation: fallbackPulse 1.5s ease-in-out infinite;
+}
+
+.fallback-bar:nth-child(2) { animation-delay: 0.1s; height: 60%; }
+.fallback-bar:nth-child(3) { animation-delay: 0.2s; height: 80%; }
+.fallback-bar:nth-child(4) { animation-delay: 0.3s; height: 60%; }
+.fallback-bar:nth-child(5) { animation-delay: 0.4s; height: 40%; }
+
+@keyframes fallbackPulse {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.3); }
+}
+
+.fallback-text {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: 12px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .visualizer-canvas {
+    height: 60px;
+  }
+  
+  .voice-visualizer.fallback {
+    padding: var(--space-sm);
+  }
+  
+  .fallback-animation {
+    height: 30px;
+  }
+}

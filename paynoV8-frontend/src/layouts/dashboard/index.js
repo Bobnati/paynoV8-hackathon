@@ -38,7 +38,8 @@ import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
 import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
 
 // Dashboard components
-import Projects from "layouts/dashboard/components/Projects";
+import Transactions from "layouts/dashboard/components/Transactions";
+
 import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 
 function Dashboard() {
@@ -51,7 +52,7 @@ function Dashboard() {
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
-               <ComplexStatisticsCard
+              <ComplexStatisticsCard
                 color="dark"
                 icon="account_balance_wallet"  // Changed icon to wallet
                 title="Wallet Balance"         // Changed from Bookings
@@ -66,7 +67,7 @@ function Dashboard() {
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
-            <ComplexStatisticsCard
+              <ComplexStatisticsCard
                 icon="person"                  // Changed icon to person
                 title="Account Number"         // Changed from Today's Users
                 count="0123456789"            // Changed to account number format
@@ -94,7 +95,7 @@ function Dashboard() {
             </MDBox>
           </Grid>
           <Grid item xs={12} md={6} lg={3}>
-           <MDBox mb={1.5}>
+            <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="primary"
                 icon="group"                   // Changed icon to group
@@ -114,45 +115,45 @@ function Dashboard() {
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mb={3}>
                 <ComplexStatisticsCard
-                color="success"
-                icon="savings"
-                title="Lifetime Savings"
-                count="N234,000"
-                percentage={{
-                  color: "success",
-                  amount: "+55%",
-                  label: "since last month",
-                }}
-              />
+                  color="success"
+                  icon="savings"
+                  title="Lifetime Savings"
+                  count="N234,000"
+                  percentage={{
+                    color: "success",
+                    amount: "+55%",
+                    label: "since last month",
+                  }}
+                />
               </MDBox>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mb={3}>
                 <ComplexStatisticsCard
-                icon="groups"
-                title="Active Bill Splits"
-                count="8"
-                percentage={{
-                  color: "success",
-                  amount: "3",
-                  label: "pending settlements"
-                }}
-              />
+                  icon="groups"
+                  title="Active Bill Splits"
+                  count="8"
+                  percentage={{
+                    color: "success",
+                    amount: "3",
+                    label: "pending settlements"
+                  }}
+                />
               </MDBox>
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
               <MDBox mb={3}>
                 <ComplexStatisticsCard
-                color="primary"
-                icon="paid"
-                title="Recent Transactions"
-                count="12"
-                percentage={{
-                  color: "success",
-                  amount: "+3",
-                  label: "in the last 24 hours"
-                }}
-              />
+                  color="primary"
+                  icon="paid"
+                  title="Recent Transactions"
+                  count="12"
+                  percentage={{
+                    color: "success",
+                    amount: "+3",
+                    label: "in the last 24 hours"
+                  }}
+                />
               </MDBox>
             </Grid>
           </Grid>
@@ -160,7 +161,7 @@ function Dashboard() {
         <MDBox>
           <Grid container spacing={3}>
             <Grid item xs={12} md={6} lg={8}>
-              <Projects />
+              <Transactions />
             </Grid>
             <Grid item xs={12} md={6} lg={4}>
               <OrdersOverview />

@@ -41,6 +41,7 @@ import User from "layouts/user";
 import Payments from "layouts/payments";
 import Notifications from "layouts/notifications";
 import Profile from "layouts/profile";
+import Transfer from "layouts/transactions";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 
@@ -96,9 +97,9 @@ const routes = [
     type: "collapse",
     name: "Transfer",
     key: "trnsactions",
-    icon: <Icon fontSize="small">person</Icon>,
+    icon: <Icon fontSize="small">send</Icon>,
     route: "/transactions",
-    component: <Transaction />,
+    component: <Transfer />,
   },
   {
     type: "collapse",
