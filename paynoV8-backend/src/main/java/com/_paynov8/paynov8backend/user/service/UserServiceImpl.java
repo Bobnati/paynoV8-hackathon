@@ -89,6 +89,7 @@ public class UserServiceImpl implements UserService{
 
 
         return RegResponse.builder()
+                .userId(savedUser.getId())
                 .responseCode(AccountUtil.ACCOUNT_CREATION_CODE)
                 .message(AccountUtil.ACCOUNT_SUCCESS_MESSAGE)
                 .firstName(savedUser.getFirstName())
