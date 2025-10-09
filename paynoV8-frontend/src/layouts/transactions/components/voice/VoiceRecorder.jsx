@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAudioRecording } from '../hooks/useAudioRecording';
+import { useAudioRecording } from '../../hooks/useAudioRecording';
 import VoiceVisualizer from './VoiceVisualizer';
 import VoicePlayer from './VoicePlayer';
 import './styles/VoiceRecorder.css';
