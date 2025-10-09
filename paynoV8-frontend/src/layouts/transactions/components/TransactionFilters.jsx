@@ -35,10 +35,10 @@ const TransactionFilters = ({ filters, onFilterChange, onSearch, searchTerm, tra
   };
 
   const hasActiveFilters = () => {
-    return filters.type !== 'all' || 
-           filters.category !== 'all' || 
-           filters.status !== 'all' || 
-           searchTerm;
+    return filters.type !== 'all' ||
+      filters.category !== 'all' ||
+      filters.status !== 'all' ||
+      searchTerm;
   };
 
   const getActiveFilterCount = () => {
@@ -64,7 +64,7 @@ const TransactionFilters = ({ filters, onFilterChange, onSearch, searchTerm, tra
             onChange={handleSearchChange}
           />
           {searchTerm && (
-            <button 
+            <button
               className="clear-search-btn"
               onClick={() => onSearch('')}
             >
@@ -72,9 +72,9 @@ const TransactionFilters = ({ filters, onFilterChange, onSearch, searchTerm, tra
             </button>
           )}
         </div>
-        
+
         <div className="filter-toggle-section">
-          <button 
+          <button
             className={`filter-toggle-btn ${hasActiveFilters() ? 'has-filters' : ''}`}
             onClick={() => setIsFiltersOpen(!isFiltersOpen)}
           >
@@ -251,7 +251,7 @@ const TransactionFilters = ({ filters, onFilterChange, onSearch, searchTerm, tra
           )}
           {searchTerm && (
             <span className="filter-chip">
-              Search: "{searchTerm}"
+              {`Search:  '${searchTerm}'`};
               <button onClick={() => onSearch('')}>✕</button>
             </span>
           )}
