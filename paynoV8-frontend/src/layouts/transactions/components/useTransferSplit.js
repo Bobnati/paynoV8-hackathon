@@ -335,60 +335,124 @@ export const useTransferSplit = () => {
   }, [validateStep, formData, calculatedShares, step]);
 
   // Confirm with PIN and submit to backend
-  const handlePinSubmit = useCallback(async () => {
-    console.log('handlePinSubmit called');
+// In useTransferSplit.js - Update the handlePinSubmit function:
+
+// Confirm with PIN and submit to backend
+const handlePinSubmit = useCallback(async () => {
+  console.log('handlePinSubmit called');
+  
+  if (!validateStep(3.5)) {
+    console.log('PIN validation failed');
+    return;
+  }
+
+  setIsSubmitting(true);
+  console.log('Starting submission process...');
+
+  try {
+    // Prepare the payload exactly as your backend expects
+    const payload = {
+      groupId: formData.groupId,
+      creatorId: formData.creatorId,
+      totalAmount: formData.totalAmount,
+      purpose: formData.purpose || 'Split Payment',
+      voiceNoteUrl: "", // Empty string as per your requirement
+      splitType: formData.splitType,
+      customSplits: null, // null as per your requirement
+      participantIds: formData.participantIds // Includes sender + other contributors
+    };
+
+    console.log('Submitting to backend:', payload);
+
+    // Make actual API call using fetch
+    /*const response = await fetch('https://paynov8-hackathon-1.onrender.com/api/split/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload)
+    });*/
+
+    // In your actual fetch calls, use:
+    const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}${process.env.REACT_APP_SPLIT_PAYMENT_ENDPOINT}`, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('authToken')}`, // Or your auth method
+    },
+    body: JSON.stringify(payload)
+    });
+
+    console.log('Response status:', response.status);
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+    }
+
+    const responseData = await response.json();
+    console.log('Backend response:', responseData);
+
+    // Extract transaction ID from response (adjust based on your API response structure)
+    const transactionId = responseData.transactionId || responseData.id || `txn_${Date.now()}`;
     
-    if (!validateStep(3.5)) {
-      console.log('PIN validation failed');
-      return;
-    }
+    // Set transaction status to pending and start polling
+    setTransactionId(transactionId);
+    setTransactionStatus('pending');
+    
+    // Start polling for transaction status
+    startTransactionPolling(transactionId);
 
-    setIsSubmitting(true);
-    console.log('Starting submission process...');
+    // Move to success step
+    setStep(4);
+    setPin('');
 
+  } catch (error) {
+    console.error('Submission error:', error);
+    setErrors({ submit: error.message || 'Failed to create split payment. Please try again.' });
+  } finally {
+    setIsSubmitting(false);
+  }
+}, [formData, pin, validateStep]);
+
+// Add this polling function
+const startTransactionPolling = useCallback(async (transactionId) => {
+  const pollInterval = setInterval(async () => {
     try {
-      const payload = {
-        groupId: formData.groupId,
-        creatorId: formData.creatorId,
-        receiverId: formData.receiverId,
-        totalAmount: formData.totalAmount,
-        purpose: formData.purpose || 'Split Payment',
-        splitType: formData.splitType,
-        customSplits: formData.customSplits,
-        participantIds: formData.participantIds,
-        pin: pin
-      };
-
-      console.log('Submitting split payment:', { 
-        ...payload, 
-        pin: '***'
+      // Poll your backend for transaction status
+      const statusResponse = await fetch(`YOUR_STATUS_ENDPOINT_HERE/${transactionId}`, {
+        headers: {
+          'Authorization': 'Bearer YOUR_AUTH_TOKEN_HERE', // Add if needed
+        }
       });
 
-      const mockTransactionId = `txn_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-      
-      await new Promise((resolve, reject) => {
-        setTimeout(() => {
-          if (Math.random() < 0.1) {
-            reject(new Error('Invalid PIN. Please try again.'));
-          } else {
-            setTransactionId(mockTransactionId);
-            setTransactionStatus('pending');
-            resolve(mockTransactionId);
-          }
-        }, 1500);
-      });
+      if (statusResponse.ok) {
+        const statusData = await statusResponse.json();
+        const transactionStatus = statusData.status; // Adjust based on your API response
 
-      console.log('Submission successful, moving to step 4');
-      setStep(4);
-      setPin('');
-
+        if (transactionStatus === 'completed' || transactionStatus === 'success') {
+          setTransactionStatus('success');
+          clearInterval(pollInterval);
+        } else if (transactionStatus === 'failed' || transactionStatus === 'rejected') {
+          setTransactionStatus('failed');
+          clearInterval(pollInterval);
+        }
+        // If still pending, continue polling
+      }
     } catch (error) {
-      console.error('Submission error:', error);
-      setErrors({ submit: error.message });
-    } finally {
-      setIsSubmitting(false);
+      console.error('Polling error:', error);
+      // Don't stop polling on temporary errors
     }
-  }, [formData, pin, validateStep]);
+  }, 3000); // Poll every 3 seconds
+
+  // Stop polling after 5 minutes (safety timeout)
+  setTimeout(() => {
+    clearInterval(pollInterval);
+    if (transactionStatus === 'pending') {
+      setTransactionStatus('failed');
+    }
+  }, 300000); // 5 minutes
+}, [formData, pin, validateStep]);
 
   // Clear transaction status
   const clearTransactionStatus = useCallback(() => {

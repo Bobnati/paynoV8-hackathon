@@ -217,9 +217,9 @@ const TransactionForm = (props) => {
         <label htmlFor="recipient" className="input-label">To</label>
         <input
           id="recipient"
-          type="text"
+          type="number"
           className={`text-input ${errors.recipient ? 'input-error' : ''}`}
-          placeholder="Name, phone number, or email"
+          placeholder="receiver's Account ID"
           value={formData.recipient}
           onChange={(e) => handleInputChange('recipient', e.target.value)}
           aria-describedby={errors.recipient ? "recipient-error" : undefined}

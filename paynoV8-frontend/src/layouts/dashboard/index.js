@@ -32,6 +32,28 @@ import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
 function Dashboard() {
   const { sales, tasks } = reportsLineChartData;
 
+  const BALANCE_ENDPOINT = 'https://paynov8-hackathon-1.onrender.com/api/banking/2025200333/wallet'
+  let walletBalance
+
+  // Using async/await for cleaner syntax
+async function displayBalance() {
+  try {
+    const response = await fetch(BALANCE_ENDPOINT);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    walletBalance = await response.json();
+    console.log('data Fetched :');
+    return walletBalance;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+// Call the function
+displayBalance();
+
   const userData = JSON.parse(localStorage.getItem("authData"));
   const user = userData.user;
   console.log(userData)
@@ -47,7 +69,7 @@ function Dashboard() {
                 color="dark"
                 icon="account_balance_wallet"  // Changed icon to wallet
                 title="Wallet Balance"         // Changed from Bookings
-                count="₦281,000"              // Added currency symbol
+                count={walletBalance || "****"}              // Added currency symbol
                 percentage={{
                   color: "success",
                   amount: "+55%",
