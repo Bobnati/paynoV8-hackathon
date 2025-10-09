@@ -1,6 +1,6 @@
 package com._paynov8.paynov8backend.vn.model;
 
-import com._paynov8.paynov8backend.Transfer.model.Transaction;
+import com._paynov8.paynov8backend.transaction.model.Transaction;
 import com._paynov8.paynov8backend.user.model.User;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
