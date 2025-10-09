@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 public class RegResponse {
+    private String userId;
     private String firstName;
     private String middleName;
     private String lastName;
@@ -18,5 +19,4 @@ public class RegResponse {
     private String message;
     private String responseCode;
     private String address;
-    private String accountNumber;
 }

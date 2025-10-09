@@ -1,0 +1,27 @@
+*{
+    margin: 0;
+    padding: 0
+
+}
+
+:root {
+
+    --bgd: linear-gradient(to bottom, rgb(231, 220, 239) 0%, rgb(205, 180, 231) 51%, rgb(231, 220, 239) 100%);
+    --bgd: white;
+    color: black;
+    --primary:  rgb(255, 255, 255);
+    --input-bgd: white;
+    --button-bgd: rgb(22, 3, 40);
+    --primary-text-color: black;
+}
+
+body.dark {
+
+    --bgd: linear-gradient( to bottom, rgb(66, 26, 94) 0%, rgb(80, 48, 102) 51%, rgb(rgb(66, 26, 94)) 100%);
+    --primary: rgb(59, 27, 81);
+}
+
+body {
+
+    background: var(--bgd);
+}
