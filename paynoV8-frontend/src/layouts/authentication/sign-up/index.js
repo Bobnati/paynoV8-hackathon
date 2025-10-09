@@ -1,3 +1,17 @@
+/**
+=========================================================
+* Material Dashboard 2 React - v2.2.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard-react
+* Copyright 2023 Creative Tim (https://www.creative-tim.com)
+
+Coded by www.creative-tim.com
+
+ =========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+*/
 
 // react-router-dom components
 import { Link, useNavigate } from "react-router-dom";
@@ -6,10 +20,6 @@ import { useState } from "react";
 // @mui material components
 import Card from "@mui/material/Card";
 import Checkbox from "@mui/material/Checkbox";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -35,7 +45,7 @@ function Cover() {
   // Handle input changes
   const handleInputChange = (field) => (event) => {
     const value = field === "agreedToTerms" ? event.target.checked : event.target.value;
-
+    
     setFormData(prev => ({
       ...prev,
       [field]: value
@@ -59,15 +69,15 @@ function Cover() {
       if (result.success) {
         // Success - redirect to sign-in page
         console.log("Sign-up successful:", result.data);
-
+        
         // Show success message and redirect
         alert("Registration successful! Redirecting to sign in...");
-
+        
         // Redirect to sign-in page after a brief delay
         setTimeout(() => {
           navigate("/authentication/sign-in");
         }, 1500);
-
+        
       } else {
         // Handle errors - only show general error
         setSubmitError(result.error || "Registration failed. Please try again.");
@@ -98,114 +108,31 @@ function Cover() {
             Join PAYNOV8
           </MDTypography>
           <MDTypography display="block" variant="button" color="white" my={1}>
-            Enter your details to register
+            Enter your email and password to register
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form" onSubmit={handleSubmit}>
-            {/* First Name */}
+            {/* Email Input */}
             <MDBox mb={2}>
-              <MDInput
-                type="text"
-                label="First Name"
-                variant="standard"
-                fullWidth
-                value={formData.firstName}
-                onChange={handleInputChange("firstName")}
-                required
-              />
-            </MDBox>
-
-            {/* Middle Name  */}
-            <MDBox mb={2}>
-              <MDInput
-                type="text"
-                label="Middle Name"
-                variant="standard"
-                fullWidth
-                value={formData.middleName}
-                required
-                onChange={handleInputChange("middleName")}
-              />
-            </MDBox>
-
-            {/* Last Name */}
-            <MDBox mb={2}>
-              <MDInput
-                type="text"
-                label="Last Name"
-                variant="standard"
-                fullWidth
-                value={formData.lastName}
-                onChange={handleInputChange("lastName")}
-                required
-              />
-            </MDBox>
-
-            {/* Phone Number */}
-            <MDBox mb={2}>
-              <MDInput
-                type="tel"
-                label="Phone Number"
-                variant="standard"
-                fullWidth
-                value={formData.phoneNumber}
-                onChange={handleInputChange("phoneNumber")}
-                required
-              />
-            </MDBox>
-
-            {/* Gender */}
-            <MDBox mb={2}>
-              <FormControl fullWidth variant="standard">
-                <InputLabel>Gender</InputLabel>
-                <Select
-                  value={formData.gender}
-                  onChange={handleInputChange("gender")}
-                  label="Gender"
-                  required
-                >
-                  <MenuItem value=""><em>Select Gender</em></MenuItem>
-                  <MenuItem value="Male">Male</MenuItem>
-                  <MenuItem value="Female">Female</MenuItem>
-                  <MenuItem value="Other">Other</MenuItem>
-                </Select>
-              </FormControl>
-            </MDBox>
-
-            {/* Address */}
-            <MDBox mb={2}>
-              <MDInput
-                type="text"
-                label="Address"
-                variant="standard"
-                fullWidth
-                value={formData.address}
-                onChange={handleInputChange("address")}
-                required
-              />
-            </MDBox>
-
-            {/* Email */}
-            <MDBox mb={2}>
-              <MDInput
-                type="email"
-                label="Email"
-                variant="standard"
-                fullWidth
+              <MDInput 
+                type="email" 
+                label="Email" 
+                variant="standard" 
+                fullWidth 
                 value={formData.email}
                 onChange={handleInputChange("email")}
                 required
               />
             </MDBox>
 
-            {/* Password */}
+            {/* Password Input */}
             <MDBox mb={2}>
-              <MDInput
-                type="password"
-                label="Password"
-                variant="standard"
-                fullWidth
+              <MDInput 
+                type="password" 
+                label="Password" 
+                variant="standard" 
+                fullWidth 
                 value={formData.password}
                 onChange={handleInputChange("password")}
                 required
@@ -214,7 +141,7 @@ function Cover() {
 
             {/* Terms Checkbox */}
             <MDBox display="flex" alignItems="center" ml={-1}>
-              <Checkbox
+              <Checkbox 
                 checked={formData.agreedToTerms}
                 onChange={handleInputChange("agreedToTerms")}
               />
@@ -249,10 +176,10 @@ function Cover() {
 
             {/* Submit Button */}
             <MDBox mt={4} mb={1}>
-              <MDButton
-                variant="gradient"
-                color="info"
-                fullWidth
+              <MDButton 
+                variant="gradient" 
+                color="info" 
+                fullWidth 
                 type="submit"
                 disabled={loading}
               >

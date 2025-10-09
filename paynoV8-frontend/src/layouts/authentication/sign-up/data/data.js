@@ -11,46 +11,6 @@ const SIGNUP_ENDPOINT = 'https://paynov8-hackathon-1.onrender.com/';
 const validateSignUpForm = (formData) => {
   const errors = {};
 
-  if (!formData.firstName?.trim()) {
-    return {
-      isValid: false,
-      errors: { general: 'First name is required' }
-    };
-  }
-
-  if (!formData.lastName?.trim()) {
-    return {
-      isValid: false,
-      errors: { general: 'Last name is required' }
-    };
-  }
-
-  if (!formData.phoneNumber?.trim()) {
-    return {
-      isValid: false,
-      errors: { general: 'Phone number is required' }
-    };
-  } else if (!isValidPhoneNumber(formData.phoneNumber)) {
-    return {
-      isValid: false,
-      errors: { general: 'Please enter a valid phone number' }
-    };
-  }
-
-  if (!formData.gender) {
-    return {
-      isValid: false,
-      errors: { general: 'Gender is required' }
-    };
-  }
-
-  if (!formData.address?.trim()) {
-    return {
-      isValid: false,
-      errors: { general: 'Address is required' }
-    };
-  }
-
   if (!formData.email?.trim()) {
     return {
       isValid: false,
@@ -94,12 +54,6 @@ const validateSignUpForm = (formData) => {
 const submitSignUp = async (formData) => {
   try {
     const signUpData = {
-      firstName: formData.firstName.trim(),
-      middleName: formData.middleName?.trim() || '', // Optional field
-      lastName: formData.lastName.trim(),
-      phoneNumber: formData.phoneNumber.trim(),
-      gender: formData.gender,
-      address: formData.address.trim(),
       email: formData.email.trim().toLowerCase(),
       password: formData.password
     };
@@ -159,12 +113,6 @@ const processSignUp = async (formData) => {
  * Get initial empty form state
  */
 const getInitialFormData = () => ({
-  firstName: '',
-  middleName: '',
-  lastName: '',
-  phoneNumber: '',
-  gender: '',
-  address: '',
   email: '',
   password: '',
   agreedToTerms: false
@@ -181,11 +129,6 @@ const getErrorMessage = (serverResponse) => {
 const isValidEmail = (email) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
-};
-
-const isValidPhoneNumber = (phone) => {
-  const phoneRegex = /^[0-9]{10,11}$/;
-  return phoneRegex.test(phone.replace(/\D/g, ''));
 };
 
 // Named exports
